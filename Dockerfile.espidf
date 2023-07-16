@@ -1,0 +1,21 @@
+FROM ubuntu:22.04
+
+RUN apt -y update && \
+    apt -y upgrade && \
+    apt -y install \
+        build-essential \
+        antlr \
+        python3 pip \
+        bison flex \
+        emacs nano \
+        cmake git \
+        python3-libusb1 libusb-dev python3.10-venv python-is-python3 \
+        gdb gdbserver openocd && \
+    pip3 install adafruit-ampy rshell 
+
+WORKDIR /opt
+
+RUN git clone --branch v5.1    --recursive https://github.com/espressif/esp-idf.git
+RUN git clone --branch v1.20.0 --recursive https://github.com/micropython/micropython.git
+RUN git clone                              https://github.com/russhughes/s3lcd.git
+ 
